@@ -1,12 +1,12 @@
-const exercise = [];
-
-const list = () => {
-  return document.getElementById("list");
-};
-
-const main = () => {
+let exercise = [];
+const baseUrl = "http://localhost:3000";
+function main() {
   return document.getElementById("main");
-};
+}
+
+function exercises() {
+  return document.getElementById("exercises");
+}
 
 function nameInput() {
   return document.getElementById("name");
@@ -28,6 +28,21 @@ function notesInput() {
   return document.getElementById("notes");
 }
 
+function form() {
+  return document.getElementById("form");
+}
+
+function getExercises() {
+  fetch(baseUrl + "/exercises")
+    .then(function (response) {
+      return response.json();
+    })
+    .then(function (data) {
+      exercise = data;
+      renderExercises();
+    });
+}
+
 function resetFormInputs() {
   nameInput().innerHTML = "";
   setsInput().innerHTML = "";
@@ -39,10 +54,6 @@ function resetFormInputs() {
 const resetMain = () => {
   main().innerHTML = "";
 };
-
-function form() {
-  return document.getElementById("form");
-}
 
 const formTemplate = () => {
   return `
@@ -72,15 +83,76 @@ function renderForm() {
 function submitForm(event) {
   event.preventDefault();
 
-  exercise.push({
-    name: nameInput().value,
-    sets: setsInput().value,
-    reps: repsInput().value,
-    weight: weightInput().value,
-    notes: notesInput().value,
+  let strongParams = {
+    exercise: {
+      name: nameInput().value,
+      sets: setsInput().value,
+      reps: repsInput().value,
+      weight: weightInput().value,
+      notes: notesInput().value,
+    },
+  };
+  fetch(baseUrl + "/exercises", {
+    headers: {
+      Accept: "application/json",
+      "Content-Type": "application/json",
+    },
+    body: JSON.stringify(strongParams),
+    method: "POST",
+  })
+    .then(function (response) {
+      return response.json();
+    })
+    .then(function (data) {
+      console.log(data);
+    });
+  renderExercises();
+  renderForm();
+}
+
+function exercisesTemplate() {
+  return `
+  <div>
+    <h2>List of Exercises</h2>
+  </div>`;
+}
+
+function renderExercise(exercise) {
+  let div = document.createElement("div");
+  let name = document.createElement("h4");
+  let sets = document.createElement("h4");
+  let reps = document.createElement("h4");
+  let weight = document.createElement("h4");
+  let notes = document.createElement("p");
+
+  let exercisesDiv = document.getElementById("exercises");
+
+  name.innerText = `Name: ${exercise.name}`;
+  sets.innerText = `Sets: ${exercise.sets}`;
+  reps.innerText = `Reps: ${exercise.reps}`;
+  weight.innerText = `Weight: ${exercise.weight}`;
+  notes.innerText = `Notes: ${exercise.notes}`;
+
+  div.appendChild(name);
+  div.appendChild(sets);
+  div.appendChild(reps);
+  div.appendChild(weight);
+  div.appendChild(notes);
+
+  exercisesDiv.appendChild(div);
+}
+
+function renderExercises() {
+  //resetMain();
+  exercises().innerHTML = exercisesTemplate();
+
+  exercise.forEach(function (exercise) {
+    renderExercise(exercise);
   });
 }
 
 document.addEventListener("DOMContentLoaded", function () {
   renderForm();
+  getExercises();
+  renderExercises();
 });
