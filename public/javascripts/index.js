@@ -150,7 +150,8 @@ function renderExercises(exercises) {
 const router = new Navigo("/");
 
 router.on("/", () => {
-  alert("Hi!");
+  const list = new WorkoutList(getMainElement());
+  list.fetchAndRender();
 });
 
 router.on("/exercises", () => {
