@@ -90,6 +90,7 @@ function submitForm(event) {
       reps: repsInput().value,
       weight: weightInput().value,
       notes: notesInput().value,
+      workout_id: 1,
     },
   };
   fetch(baseUrl + "/exercises", {
