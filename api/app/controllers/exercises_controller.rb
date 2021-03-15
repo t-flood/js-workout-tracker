@@ -18,7 +18,7 @@ class ExercisesController < ApplicationController
     @exercise = Exercise.new(exercise_params)
 
     if @exercise.save
-      render json: @exercise, status: :created, location: @exercise
+      render json: @exercise, status: :created, location: @exercise, include: [:workout]
     else
       render json: @exercise.errors, status: :unprocessable_entity
     end
@@ -36,6 +36,8 @@ class ExercisesController < ApplicationController
   # DELETE /exercises/1
   def destroy
     @exercise.destroy
+
+    render json: @exercise
   end
 
   private
@@ -46,6 +48,6 @@ class ExercisesController < ApplicationController
 
     # Only allow a list of trusted parameters through.
     def exercise_params
-      params.require(:exercise).permit(:name, :reps, :sets, :weight, :notes)
+      params.require(:exercise).permit(:name, :reps, :sets, :weight, :notes, :workout_attributes)
     end
 end
