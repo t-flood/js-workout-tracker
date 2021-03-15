@@ -1,4 +1,4 @@
-const baseUrl = "http://localhost:3000";
+const baseUrl = "http://localhost:3000/api";
 
 function getMainElement() {
   return document.getElementById("main");
@@ -147,7 +147,17 @@ function renderExercises(exercises) {
   });
 }
 
-document.addEventListener("DOMContentLoaded", function () {
+const router = new Navigo("/");
+
+router.on("/", () => {
+  alert("Hi!");
+});
+
+router.on("/exercises", () => {
   renderForm();
   fetchAndRenderExercises();
+});
+
+document.addEventListener("DOMContentLoaded", function () {
+  router.resolve();
 });
