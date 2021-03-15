@@ -18,8 +18,9 @@ class WorkoutList {
         this.render();
       })
       .catch((error) => {
-        this.loading = true;
+        this.loading = false;
         this.error = error;
+        this.render();
       });
   }
 
@@ -36,8 +37,17 @@ class WorkoutList {
       return;
     }
 
+    const list = document.createElement("ul");
+    this.element.appendChild(list);
+
     this.workouts.forEach((workout) => {
-      this.element.innerHTML += workout.name;
+      const item = document.createElement("li");
+      const link = createLink(
+        `${workout.name}: ${workout.date}`,
+        `/workouts/${workout.id}`
+      );
+      item.appendChild(link);
+      list.appendChild(item);
     });
   }
 }

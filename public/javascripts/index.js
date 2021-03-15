@@ -149,14 +149,32 @@ function renderExercises(exercises) {
 
 const router = new Navigo("/");
 
+function createLink(label, href) {
+  const link = document.createElement("a");
+  link.innerHTML = label;
+  link.href = href;
+  link.addEventListener("click", (event) => {
+    event.preventDefault();
+
+    const location = event.target.getAttribute("href");
+    router.navigate(location);
+  });
+  return link;
+}
+
 router.on("/", () => {
-  const list = new WorkoutList(getMainElement());
+  const main = getMainElement();
+  const list = new WorkoutList(main);
   list.fetchAndRender();
 });
 
-router.on("/exercises", () => {
-  renderForm();
-  fetchAndRenderExercises();
+router.on("/workouts/:id", (route) => {
+  console.log(route.data.id);
+  const main = getMainElement();
+  const page = new WorkoutDetails(main, route.data.id);
+  page.fetchAndRender();
+  // renderForm();
+  // fetchAndRenderExercises();
 });
 
 document.addEventListener("DOMContentLoaded", function () {
