@@ -128,17 +128,22 @@ function createLink(label, href) {
   return link;
 }
 
+router.on("/workouts/new", (route) => {
+  const main = getMainElement();
+  const form = new WorkoutForm(main);
+  form.render();
+});
+
+router.on("/workouts/:id", (route) => {
+  const main = getMainElement();
+  const page = new WorkoutDetails(main, route.data.id);
+  page.fetchAndRender();
+});
+
 router.on("/", () => {
   const main = getMainElement();
   const list = new WorkoutList(main);
   list.fetchAndRender();
-});
-
-router.on("/workouts/:id", (route) => {
-  console.log(route.data.id);
-  const main = getMainElement();
-  const page = new WorkoutDetails(main, route.data.id);
-  page.fetchAndRender();
 });
 
 document.addEventListener("DOMContentLoaded", function () {

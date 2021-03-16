@@ -21,15 +21,43 @@
     ></script>
     <script src="/javascripts/globals.js"></script>
     <script src="/javascripts/WorkoutDetails.js"></script>
+    <script src="/javascripts/WorkoutForm.js"></script>
     <script src="/javascripts/Exercise.js"></script>
     <script src="/javascripts/WorkoutList.js"></script>
     <script src="/javascripts/index.js"></script>
   </head>
   <body>
-    <div class="p-5">
-      <h1>Workout Tracker</h1>
-      <div id="exercises"></div>
-      <div id="main"></div>
-    </div>
+    <nav class="navbar navbar-expand-lg navbar-light bg-light mb-4">
+      <div class="container">
+        <a class="navbar-brand" href="/" data-navigo>Workout Tracker</a>
+        <button
+          class="navbar-toggler"
+          type="button"
+          data-bs-toggle="collapse"
+          data-bs-target="#navbarSupportedContent"
+          aria-controls="navbarSupportedContent"
+          aria-expanded="false"
+          aria-label="Toggle navigation"
+        >
+          <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarSupportedContent">
+          <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+            <li class="nav-item">
+              <a
+                class="nav-link"
+                aria-current="page"
+                href="/workouts/new"
+                data-navigo
+                >Add Workout</a
+              >
+            </li>
+          </ul>
+        </div>
+      </div>
+    </nav>
+
+    <div id="exercises"></div>
+    <div id="main" class="container"></div>
   </body>
 </html>
