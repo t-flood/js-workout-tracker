@@ -1,37 +1,5 @@
 const baseUrl = "http://localhost:3000/api";
 
-function getMainElement() {
-  return document.getElementById("main");
-}
-
-function getExercisesElement() {
-  return document.getElementById("exercises");
-}
-
-function getNameInput() {
-  return document.getElementById("name");
-}
-
-function getSetsInput() {
-  return document.getElementById("sets");
-}
-
-function getRepsInput() {
-  return document.getElementById("reps");
-}
-
-function getWeightInput() {
-  return document.getElementById("weight");
-}
-
-function getNotesInput() {
-  return document.getElementById("notes");
-}
-
-function getFormElement() {
-  return document.getElementById("form");
-}
-
 function fetchAndRenderExercises() {
   fetch(baseUrl + "/exercises")
     .then(function (response) {
@@ -155,9 +123,7 @@ function createLink(label, href) {
   link.href = href;
   link.addEventListener("click", (event) => {
     event.preventDefault();
-
-    const location = event.target.getAttribute("href");
-    router.navigate(location);
+    router.navigate(href);
   });
   return link;
 }
@@ -173,8 +139,6 @@ router.on("/workouts/:id", (route) => {
   const main = getMainElement();
   const page = new WorkoutDetails(main, route.data.id);
   page.fetchAndRender();
-  // renderForm();
-  // fetchAndRenderExercises();
 });
 
 document.addEventListener("DOMContentLoaded", function () {
