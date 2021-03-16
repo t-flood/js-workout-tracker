@@ -10,7 +10,7 @@ class WorkoutsController < ApplicationController
 
   # GET /workouts/1
   def show
-    render json: @workout
+    render json: @workout.as_json(include: :exercises)
   end
 
   # POST /workouts
