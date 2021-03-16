@@ -37,17 +37,19 @@ class WorkoutList {
       return;
     }
 
-    const list = document.createElement("ul");
+    const list = document.createElement("div");
+    list.classList.add("list-group");
     this.element.appendChild(list);
 
     this.workouts.forEach((workout) => {
-      const item = document.createElement("li");
       const link = createLink(
-        `${workout.name}: ${workout.date}`,
+        workout.date
+          ? `${workout.name}: ${new Date(workout.date).toLocaleDateString()}`
+          : workout.name,
         `/workouts/${workout.id}`
       );
-      item.appendChild(link);
-      list.appendChild(item);
+      link.classList.add("list-group-item");
+      list.appendChild(link);
     });
   }
 }

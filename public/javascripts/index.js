@@ -1,5 +1,9 @@
 const baseUrl = "http://localhost:3000/api";
 
+function getMainElement() {
+  return document.getElementById("main");
+}
+
 function fetchAndRenderExercises() {
   fetch(baseUrl + "/exercises")
     .then(function (response) {
