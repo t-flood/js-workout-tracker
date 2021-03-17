@@ -1,24 +1,15 @@
 # README
 
-This README would normally document whatever steps are necessary to get the
-application up and running.
+# Workout Tracker
 
-Things you may want to cover:
+This is a single page workout tracker to track your workouts by name and date. Add your exercises, sets, reps, weight, and any notes to your workouts as you're completing them.
 
-* Ruby version
+## Getting Started
 
-* System dependencies
+First, you'll need to install the dependencies:
 
-* Configuration
+    $ bundle install
 
-* Database creation
+to start the rails server, run:
 
-* Database initialization
-
-* How to run the test suite
-
-* Services (job queues, cache servers, search engines, etc.)
-
-* Deployment instructions
-
-* ...
+    $ bundle exec rails server
