@@ -6,7 +6,6 @@ class WorkoutDetails {
     this.loading = false;
     this.error = undefined;
 
-    // The exercise that we're currently editing
     this.currentExercise = undefined;
   }
 

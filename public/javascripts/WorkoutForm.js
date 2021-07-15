@@ -8,7 +8,6 @@ class WorkoutForm {
     const date = document.getElementById("workout_date");
     const notes = document.getElementById("workout_notes");
 
-    // Assemble our params
     const params = {
       workout: {
         name: name.value,

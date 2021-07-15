@@ -51,5 +51,18 @@ class WorkoutList {
       link.classList.add("list-group-item");
       list.appendChild(link);
     });
+
+    const backgroundButton = document.createElement("button");
+    backgroundButton.innerText = "Change background";
+    backgroundButton.classList.add("btn", "btn-danger");
+    backgroundButton.addEventListener("click", () => this.changeBackground());
+    this.element.appendChild(backgroundButton);
+  }
+
+  changeBackground() {
+    let background = document.body.style.backgroundColor;
+    if (background === "")
+      background = document.body.style.backgroundColor = "black";
+    else background = document.body.style.backgroundColor = "";
   }
 }
